@@ -1,126 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Anciencraft | Servidor Minecraft</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Minecraft&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servidor Minecraft Legendario</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Partículas de fondo (opcional: usa canvas para polvo, fuego, etc.) -->
-  <div id="particles"></div>
 
-  <!-- Logo principal animado -->
-  <div class="logo-container">
-    <h1 class="logo">ANCIENCRAFT</h1>
-    <div class="logo-sub">🏰 Servidor Épico de Minecraft</div>
-  </div>
+    <header>
+        <h1>Dragon Craft</h1>
+        <p>El mejor servidor Survival & PvP</p>
+        
+        <nav>
+            <a href="#" class="mc-btn">Inicio</a>
+            <a href="#" class="mc-btn btn-store">Tienda</a>
+            <a href="https://discord.gg/ejemplo" target="_blank" class="mc-btn btn-discord">Discord</a>
+            <a href="#" class="mc-btn">Reglas</a>
+            <a href="#" class="mc-btn">Registro</a>
+            <a href="#" class="mc-btn btn-play">Iniciar Sesión</a>
+        </nav>
+    </header>
 
-  <!-- Barra superior: jugadores, staff -->
-  <div class="top-bar">
-    <div class="player-count">
-      <span class="icon">👤</span>
-      <span id="playerDisplay">Cargando...</span>
-    </div>
-    <div class="staff-info">
-      <span>👑 Dueño: <strong>TheKingAJRH</strong></span>
-      <span>🛡️ Sub-dueño: <strong>AlproYT</strong></span>
-    </div>
-  </div>
-
-  <!-- Contenedor principal (modo tarjetas) -->
-  <main class="main-grid">
-    <!-- Tarjeta: Registro -->
-    <div class="card" id="registerCard">
-      <div class="card-icon">📝</div>
-      <h2>Regístrate</h2>
-      <p>Únete al reino y reclama tu lugar.</p>
-      <button class="btn primary" id="openRegisterBtn">Abrir Registro</button>
-    </div>
-
-    <!-- Tarjeta: Discord -->
-    <a href="https://discord.gg/jMerJQ89" target="_blank" class="card discord-card">
-      <div class="card-icon">💬</div>
-      <h2>Discord</h2>
-      <p>Únete a la comunidad oficial.</p>
-      <div class="btn secondary">Entrar</div>
-    </a>
-
-    <!-- Tarjeta: Mini-juego -->
-    <div class="card" id="gameCard">
-      <div class="card-icon">🎯</div>
-      <h2>Mini-juego</h2>
-      <p>¡Defiende la aldea del dragón!</p>
-      <button class="btn primary" id="startGameBtn">Jugar</button>
-    </div>
-
-    <!-- Tarjeta: Tienda -->
-    <div class="card">
-      <div class="card-icon">🛒</div>
-      <h2>Tienda</h2>
-      <p>Próximamente: cosméticos y ventajas.</p>
-      <div class="btn disabled">Próximamente</div>
-    </div>
-  </main>
-
-  <!-- Modal de Registro -->
-  <div id="registerModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" id="closeRegisterModal">&times;</span>
-      <h2>🏰 Registro en Anciencraft</h2>
-      <form id="registerForm">
-        <div class="form-group">
-          <label for="mcName">Nombre de Minecraft *</label>
-          <input type="text" id="mcName" maxlength="16" required placeholder="Ej: Steve">
+    <div class="main-container">
+        
+        <div class="server-info">
+            <h2>¡Únete a la batalla!</h2>
+            <p>Conquista el END, derrota al dragón y crea tu facción.</p>
+            <div class="server-ip" title="Click para copiar">IP: PLAY.DRAGONCRAFT.NET</div>
         </div>
-        <div class="form-group">
-          <label for="email">Correo (opcional)</label>
-          <input type="email" id="email" placeholder="tu@email.com">
+
+        <div class="minigame-container">
+            <h2>Minijuego: Minero de Diamantes</h2>
+            <p>¡Haz clic en el bloque de diamante para ganar minerales!</p>
+            
+            <div class="game-area">
+                <div id="block-target"></div>
+            </div>
+            
+            <div id="score-board">Minerales: <span id="score">0</span></div>
+            <br>
+            <button class="mc-btn" id="reset-btn">Reiniciar</button>
         </div>
-        <button type="submit" class="btn large primary">✅ Registrarme</button>
-      </form>
-      <p id="formMessage"></p>
+
     </div>
-  </div>
 
-  <!-- Modal de Mini-juego -->
-  <div id="gameModal" class="modal">
-    <div class="modal-content game-modal">
-      <span class="close-btn" id="closeGameModal">&times;</span>
-      <h2>🐉 ¡Defiende la Aldea!</h2>
-      <div id="gameArea">
-        <div id="dragon">🐉</div>
-        <div id="village">🏰</div>
-        <div id="score">Puntos: <span id="points">0</span></div>
-      </div>
-      <p class="game-instructions">¡Haz clic en el dragón para disparar flechas! 🏹</p>
-    </div>
-  </div>
+    <footer>
+        &copy; 2025 DragonCraft Server. Todos los derechos reservados.
+    </footer>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Anciencraft Studios | IP: <strong>anciencraft</strong></p>
-    <div class="rules-toggle" id="toggleRules">📜 Ver Reglas</div>
-  </footer>
-
-  <!-- Panel de Reglas (oculto por defecto) -->
-  <div id="rulesPanel" class="rules-panel">
-    <div class="rules-content">
-      <h3>📜 Reglas del Servidor Anciencraft</h3>
-      <ol>
-        <li>⛔ Prohibido el grief sin consentimiento.</li>
-        <li>⛔ No usar hacks, X-ray, fly, etc.</li>
-        <li>✅ Respeto absoluto. Sin acoso ni spam.</li>
-        <li>✅ PvP solo en zonas designadas o con OK.</li>
-        <li>✅ Usa <code>/report [razón]</code> para denuncias.</li>
-        <li>✅ ¡Diviértete, construye y colabora!</li>
-      </ol>
-      <button id="closeRules" class="btn small secondary">Cerrar</button>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
