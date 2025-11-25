@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>anciencraft</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Partículas de fondo (animación sutil) -->
+  <div id="particles"></div>
+
+  <!-- Barra de navegación -->
+  <nav class="navbar">
+    <div class="logo">anciencraft</div>
+    <ul class="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#tienda">Tienda</a></li>
+      <li><a href="#top">Top Jugadores</a></li>
+      <li><a href="#staff">Staff</a></li>
+      <li><a href="#reglas">Reglas</a></li>
+      <li class="auth">
+        <button id="btn-login" class="btn">Iniciar Sesión</button>
+        <button id="btn-register" class="btn">Registrarse</button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section id="inicio" class="hero">
+    <h1 class="glow">¡Bienvenido a anciencraft!</h1>
+    <p>Únete al mejor servidor de Minecraft</p>
+    <div class="ip-box">
+      <span id="server-ip">mc.ancientcraft.qzz.io</span>
+      <button id="copy-ip" class="btn copy-btn">📋 Copiar IP</button>
+    </div>
+    <div class="players-online">
+      <span>👥 Jugadores en línea: <span id="player-count">0</span></span>
+    </div>
+    <a href="https://discord.gg/tudiscord" target="_blank" class="btn discord-btn">
+      <i class="fab fa-discord"></i> Únete a Discord
+    </a>
+  </section>
+
+  <!-- Tienda -->
+  <section id="tienda" class="section">
+    <h2>Tienda</h2>
+    <div class="store-grid">
+      <div class="item">
+        <h3>Kit Iniciador</h3>
+        <p>10.000 monedas</p>
+        <button class="btn buy-btn">Comprar</button>
+      </div>
+      <div class="item">
+        <h3>Rango VIP</h3>
+        <p>50.000 monedas</p>
+        <button class="btn buy-btn">Comprar</button>
+      </div>
+      <div class="item">
+        <h3>Montura Dragón</h3>
+        <p>100.000 monedas</p>
+        <button class="btn buy-btn">Comprar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Jugadores -->
+  <section id="top" class="section">
+    <h2>Top Jugadores</h2>
+    <ol class="leaderboard">
+      <li><span>1.</span> Steve ★ ★ ★</li>
+      <li><span>2.</span> Herobrine</li>
+      <li><span>3.</span> Notch</li>
+      <li><span>4.</span> CreeperKing</li>
+      <li><span>5.</span> EnderGirl</li>
+    </ol>
+  </section>
+
+  <!-- Staff -->
+  <section id="staff" class="section">
+    <h2>Staff</h2>
+    <div class="staff-grid">
+      <div class="staff-card">
+        <h3>TheKingAJRH</h3>
+        <p class="role">👑 Dueño</p>
+      </div>
+      <div class="staff-card">
+        <h3>AlproYT</h3>
+        <p class="role">⚙️ Sub-Dueño</p>
+      </div>
+      <div class="staff-card">
+        <h3>Moderador1</h3>
+        <p class="role">🛡️ Moderador</p>
+      </div>
+      <div class="staff-card">
+        <h3>BuilderMax</h3>
+        <p class="role">🎨 Builder</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reglas -->
+  <section id="reglas" class="section">
+    <h2>Reglas del Servidor</h2>
+    <ul class="rules-list">
+      <li>1. No hacer grief (destruir construcciones ajenas).</li>
+      <li>2. Respetar a todos los jugadores y staff.</li>
+      <li>3. No usar hacks, cheats o exploits.</li>
+      <li>4. No spam ni flood en el chat.</li>
+      <li>5. No hacer PVP fuera de zonas permitidas.</li>
+      <li>6. No compartir cuentas ni robar items.</li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 <strong>anciencraft studios</strong> — Servidor propiedad de TheKingAJRH & AlproYT</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
