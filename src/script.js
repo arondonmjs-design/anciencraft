@@ -1,76 +1,128 @@
-// ── Anciencraft - Script Principal ─────────────────────────────────────
-// ✦ Contador de jugadores, interacciones y preparación para mini-juegos
-// ✦ Compatible con futuras integraciones (Discord Rich Presence, etc.)
-
+// ✦ Anciencraft — Script Completo (Registro + Mini-juego)
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('🎮 Anciencraft cargado — ¡Listo para la aventura!');
+  // 🔑 Supabase (¡CAMBIA ESTOS VALORES!)
+  const SUPABASE_URL = 'https://qhehwdnzpifbeqayheud.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_secret_7bYm6cESDr7qOjsrcIoOFA_geo8knIW'; // ← TU KEY
 
-  // ── 1. Contador de jugadores (simulado) ──────────────────────────────
-  const countEl = document.getElementById('count');
-  if (countEl) {
-    function updatePlayerCount() {
-      // Rango realista: entre 18 y 32 jugadores
-      const players = Math.floor(18 + Math.random() * 15);
-      countEl.textContent = players;
-      // Opcional: cambiar color si hay muchos jugadores
-      countEl.style.color = players > 30 ? '#e74c3c' : '#2ecc71';
-    }
+  // Inicializar cliente
+  const { createClient } = Supabase;
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    updatePlayerCount(); // Inicial
-    setInterval(updatePlayerCount, 30000); // Actualiza cada 30s
+  // ── 1. Contador de jugadores ─────────────────────────────────────────
+  const playerDisplay = document.getElementById('playerDisplay');
+  let playerCount = 24;
+
+  function updatePlayerCount() {
+    playerCount = Math.floor(18 + Math.random() * 15);
+    playerDisplay.textContent = `${playerCount} en línea`;
+    playerDisplay.style.color = playerCount > 30 ? '#e74c3c' : '#2ecc71';
   }
 
-  // ── 2. Botón de Registro ──────────────────────────────────────────────
-  const registerBtn = document.getElementById('registerBtn');
-  if (registerBtn) {
-    registerBtn.addEventListener('click', (e) => {
+  updatePlayerCount();
+  setInterval(updatePlayerCount, 30000);
+
+  // ── 2. Modal de Registro ─────────────────────────────────────────────
+  const registerModal = document.getElementById('registerModal');
+  const openRegisterBtn = document.getElementById('openRegisterBtn');
+  const closeRegisterBtn = document.getElementById('closeRegisterModal');
+  const registerForm = document.getElementById('registerForm');
+  const formMessage = document.getElementById('formMessage');
+
+  if (openRegisterBtn) openRegisterBtn.onclick = () => registerModal.style.display = 'block';
+  if (closeRegisterBtn) closeRegisterBtn.onclick = () => registerModal.style.display = 'none';
+  window.onclick = (e) => { if (e.target === registerModal) registerModal.style.display = 'none'; };
+
+  if (registerForm) {
+    registerForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      // ✦ Mensaje personalizado (puedes cambiarlo)
-      const messages = [
-        '✨ ¡Preparando tu cuenta para Anciencraft!',
-        '⛏️ Tu perfil se está creando... ¡Pronto podrás minar con nosotros!',
-        '🐉 El dragón ha sido notificado: ¡un nuevo héroe se acerca!',
-        '✅ Función de registro en desarrollo. ¡Próximamente!',
-        '🔐 Vinculación con Minecraft en proceso. ¡Gracias por tu paciencia!'
-      ];
-      const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-      alert(randomMsg);
-    });
-  }
+      const mcName = document.getElementById('mcName').value.trim();
+      const email = document.getElementById('email').value.trim();
 
-  // ── 3. Efecto extra: Brillo en hover (mejora UX visual) ───────────────
-  const buttons = document.querySelectorAll('.btn');
-  buttons.forEach(btn => {
-    btn.addEventListener('mouseenter', () => {
-      btn.style.filter = 'brightness(1.1) saturate(1.2)';
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.filter = 'brightness(1) saturate(1)';
-    });
-  });
+      if (!mcName || mcName.length < 3 || mcName.length > 16) {
+        showMessage('❌ Nombre de Minecraft inválido (3-16 caracteres).', 'error');
+        return;
+      }
 
-  // ── 4. Soporte futuro para mini-juego (placeholder listo para usar) ───
-  // ¡Descomenta y expande cuando quieras añadirlo!
-  /*
-  function initMiniGame() {
-    console.log('🕹️ Mini-juego: "Defiende la Aldea" cargado.');
+      try {
+        const { error } = await supabase
+          .from('registrations')
+          .insert([{ minecraft_name: mcName, email: email || null }]);
 
-    // Ejemplo: detectar click en el dragón (área aproximada)
-    document.body.addEventListener('click', (e) => {
-      const dragonX = window.innerWidth * 0.75;
-      const dragonY = window.innerHeight * 0.3;
-      const dist = Math.hypot(e.clientX - dragonX, e.clientY - dragonY);
-      if (dist < 100) {
-        alert('🎯 ¡Le diste al dragón! +10 puntos');
+        if (error) throw error;
+
+        showMessage(`✅ ¡Bienvenido, ${mcName}! 🎉`, 'success');
+        registerForm.reset();
+        setTimeout(() => registerModal.style.display = 'none', 2000);
+      } catch (err) {
+        console.error('Error:', err);
+        showMessage('❌ Hubo un problema. Intenta más tarde.', 'error');
       }
     });
   }
 
-  // Llama a initMiniGame() cuando quieras activarlo
-  // initMiniGame();
-  */
+  function showMessage(text, type) {
+    formMessage.textContent = text;
+    formMessage.className = type;
+  }
 
-  // ── 5. Tecla secreta: "M" para mostrar mensaje de staff ───────────────
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'm' || e.key === 'M') {
-      alert('👑 Anciencraft es propiedad de:\n- Dueño: TheKingAJRH\n- Sub-dueño: AlproYT\n\n
+  // ── 3. Mini-juego: Tiro al Dragón ───────────────────────────────────
+  const gameModal = document.getElementById('gameModal');
+  const startGameBtn = document.getElementById('startGameBtn');
+  const closeGameBtn = document.getElementById('closeGameModal');
+  const gameArea = document.getElementById('gameArea');
+  const dragon = document.getElementById('dragon');
+  const pointsEl = document.getElementById('points');
+
+  let points = 0;
+  let dragonMoving = false;
+
+  if (startGameBtn) startGameBtn.onclick = () => {
+    gameModal.style.display = 'block';
+    points = 0;
+    pointsEl.textContent = points;
+    startDragonMovement();
+  };
+
+  if (closeGameBtn) closeGameBtn.onclick = () => {
+    gameModal.style.display = 'none';
+    dragonMoving = false;
+  };
+
+  function startDragonMovement() {
+    dragonMoving = true;
+    moveDragon();
+  }
+
+  function moveDragon() {
+    if (!dragonMoving) return;
+
+    const maxX = gameArea.clientWidth - 100;
+    const maxY = gameArea.clientHeight - 100;
+    const newX = Math.random() * maxX;
+    const newY = 50 + Math.random() * (maxY - 100);
+
+    dragon.style.left = `${newX}px`;
+    dragon.style.top = `${newY}px`;
+
+    // Escalar al hacer clic
+    dragon.style.transform = 'scale(1)';
+    setTimeout(() => {
+      if (dragonMoving) dragon.style.transform = 'scale(1.1)';
+    }, 100);
+
+    setTimeout(moveDragon, 1200 + Math.random() * 800);
+  }
+
+  if (dragon) {
+    dragon.addEventListener('click', () => {
+      if (!dragonMoving) return;
+      points += 10;
+      pointsEl.textContent = points;
+      dragon.style.transform = 'scale(0.8)';
+      setTimeout(() => {
+        if (dragonMoving) dragon.style.transform = 'scale(1.1)';
+      }, 100);
+
+      // Efecto de flecha (opcional: añadir partícula)
+      createArrowEffect(dragon.offsetLeft + 30, dragon.offsetTop + 30);
+    });
