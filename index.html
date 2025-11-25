@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AncienCraft — Servidor de Minecraft</title>
+  <meta name="description" content="Servidor de Minecraft con temática épica: castillo, dragón, eventos y comunidad. Únete con IP: anciencraft">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Cinzel:wght@700&family=Fredoka:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- CSS Principal -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1 class="logo">AncienCraft</h1>
+      <div class="subtitle">Servidor Oficial</div>
+      <p class="tagline">Construye tu legado. Defiende el reino. El dragón ataca… pero juntos somos invencibles.</p>
+
+      <!-- Escena épica -->
+      <div class="scene">
+        <div class="castle">
+          <div class="tower left"></div>
+          <div class="tower center">
+            <div class="roof" style="left: -5px;"></div>
+            <div class="roof" style="left: 20px;"></div>
+            <div class="roof" style="left: 45px;"></div>
+          </div>
+          <div class="tower right"></div>
+          <div class="wall"></div>
+        </div>
+        <div class="dragon"><i class="fas fa-dragon"></i></div>
+        <div id="fire-particles"></div>
+      </div>
+
+      <!-- Estadísticas -->
+      <div class="stats-bar">
+        <div class="stat-card">
+          <div class="stat-label">Jugadores online</div>
+          <div class="stat-value" id="player-count">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Modo principal</div>
+          <div class="stat-value">Supervivencia</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Versión</div>
+          <div class="stat-value">1.20.1</div>
+        </div>
+      </div>
+
+      <!-- Botones clave -->
+      <div class="hero-actions">
+        <a href="#" class="btn btn-primary" id="copy-ip-btn">
+          <i class="fas fa-server"></i> Copiar IP del Servidor
+        </a>
+        <a href="https://discord.gg/jMerJQ89" target="_blank" class="btn btn-discord">
+          <i class="fab fa-discord"></i> Unirse al Discord
+        </a>
+      </div>
+
+      <!-- Tarjeta IP -->
+      <div class="ip-card">
+        <div class="ip-label">Dirección del servidor</div>
+        <div class="ip-value" id="server-ip">anciencraft</div>
+        <button class="copy-btn" id="copy-btn">
+          <i class="fas fa-copy"></i> Copiar al portapapeles
+        </button>
+      </div>
+    </header>
+
+    <!-- Mapa del reino -->
+    <section class="map-section">
+      <h3 class="map-title">Mapa del Reino de AncienCraft</h3>
+      <svg class="overworld-map" viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="1000" height="300" fill="#1b5e20"/>
+        <path d="M0,150 Q250,120 500,160 T1000,140" stroke="#42a5f5" stroke-width="20" fill="none"/>
+        <!-- Aldea -->
+        <g fill="#8d6e63">
+          <rect x="120" y="180" width="30" height="25"/>
+          <rect x="160" y="175" width="25" height="30"/>
+          <circle cx="135" cy="130" r="8" fill="#ffb74d"/>
+        </g>
+        <text x="135" y="220" fill="white" font-size="14" text-anchor="middle">Aldea Roble</text>
+        <!-- Templo -->
+        <g fill="#388e3c">
+          <rect x="400" y="160" width="40" height="35"/>
+          <polygon points="400,160 420,130 440,160" fill="#2e7d32"/>
+        </g>
+        <text x="420" y="210" fill="white" font-size="14" text-anchor="middle">Templo</text>
+        <!-- Castillo -->
+        <g fill="#455a64">
+          <rect x="680" y="140" width="60" height="50"/>
+          <rect x="670" y="120" width="20" height="20"/>
+          <rect x="720" y="120" width="20" height="20"/>
+        </g>
+        <text x="710" y="210" fill="gold" font-size="16" font-weight="bold" text-anchor="middle">.Castillo</text>
+        <!-- Arena -->
+        <circle cx="880" cy="165" r="25" fill="none" stroke="#ffd700" stroke-width="3" stroke-dasharray="5,5"/>
+        <text x="880" y="205" fill="gold" font-size="14" text-anchor="middle">Arena</text>
+        <text x="50" y="30" fill="white" font-size="14">🏞️ Overworld — Explora, construye, defiende</text>
+      </svg>
+    </section>
+
+    <!-- Staff -->
+    <section class="staff-section">
+      <h3 class="staff-title">Líderes del Reino</h3>
+      <div class="staff-grid">
+        <div class="staff-card">
+          <div class="avatar"><i class="fas fa-crown"></i></div>
+          <div class="staff-name">TheKingAJRH</div>
+          <div class="staff-role">👑 Fundador & Dueño</div>
+        </div>
+        <div class="staff-card">
+          <div class="avatar"><i class="fas fa-shield-alt"></i></div>
+          <div class="staff-name">AlproYT</div>
+          <div class="staff-role">🛡️ Sub-Dueño</div>
+        </div>
+        <div class="staff-card">
+          <div class="avatar"><i class="fas fa-wrench"></i></div>
+          <div class="staff-name">BuilderTeam</div>
+          <div class="staff-role">⚒️ Constructores</div>
+        </div>
+        <div class="staff-card">
+          <div class="avatar"><i class="fas fa-bolt"></i></div>
+          <div class="staff-name">EventStaff</div>
+          <div class="staff-role">⚡ Organizadores</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reglas -->
+    <section class="rules-section">
+      <h3 class="rules-title">Código del Reino</h3>
+      <ul class="rules-list">
+        <li>Respeto absoluto: prohibido el acoso, insultos o lenguaje ofensivo.</li>
+        <li>Prohibido griefear, robar, usar X‑Ray, hacks o autoclickers.</li>
+        <li>Protege tu construcción con <code>/claim</code>. El staff no recupera builds sin reporte previo.</li>
+        <li>Usa <code>/report [jugador] [motivo]</code> para denunciar. No uses el chat para acusaciones.</li>
+        <li>¡Diviértete, colabora y deja tu huella en AncienCraft!</li>
+      </ul>
+    </section>
+
+    <!-- Mini-juego -->
+    <section class="game-section">
+      <h3 class="game-title">🎮 Rompe la Obsidiana</h3>
+      <p>Haz clic rápido antes de que se regenere</p>
+      <div id="obsidian-block"></div>
+      <div>Puntuación: <span id="score">0</span></div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p class="footer-text">
+        AncienCraft © 2025 — Servidor no oficial de Minecraft. Hecho con ❤️ por la comunidad.
+      </p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">✅ IP copiada: <strong>anciencraft</strong></div>
+
+  <!-- JS principal -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
