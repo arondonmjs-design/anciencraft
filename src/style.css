@@ -1,0 +1,165 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Minecraft', monospace;
+  background: linear-gradient(to bottom, #5e8c31, #3a5a20);
+  color: #fff;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Fondo: Aldea + Dragón */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: 
+    url('https://i.imgur.com/0z0QbB4.png') no-repeat center bottom / contain,
+    url('https://i.imgur.com/2f9zvVh.png') no-repeat 75% 30% / 25% auto;
+  z-index: -2;
+  opacity: 0.9;
+}
+
+/* Logo de fondo sutil */
+body::after {
+  content: "anciencraft";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8rem;
+  color: rgba(255, 255, 255, 0.05);
+  z-index: -1;
+  white-space: nowrap;
+  text-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  position: relative;
+  z-index: 10;
+}
+
+h1 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2.5rem;
+  text-shadow: 4px 4px 0 #000;
+  color: #f1c40f;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #ecf0f1;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border: 3px solid #fff;
+  background: #e67e22;
+  color: white;
+  transition: all 0.3s;
+  box-shadow: 4px 4px 0 #000;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #d35400;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+.btn-discord { 
+  background: #5865F2; 
+}
+.btn-discord:hover { 
+  background: #4752c4; 
+}
+
+.card {
+  background: rgba(0, 0, 0, 0.75);
+  border: 3px solid #555;
+  padding: 1.5rem;
+  margin: 2rem 1rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 8px;
+  box-shadow: 0 6px 0 #222;
+}
+
+.card h2 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.8rem;
+  color: #2ecc71;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.rules ol {
+  padding-left: 1.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.rules li {
+  margin-bottom: 0.8rem;
+}
+
+.staff {
+  text-align: center;
+  font-size: 1.1rem;
+  margin: 1rem 0;
+}
+
+.staff span {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.player-count {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0.8rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+}
+
+.store-text {
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 
