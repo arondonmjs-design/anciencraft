@@ -9,7 +9,7 @@
   <script src="js/main.js" defer></script>
 </head>
 <body>
-  <!-- Tactical Sidebar (HUD Moderno) -->
+  <!-- Tactical Sidebar -->
   <aside class="tactical-sidebar">
     <div class="sidebar-header">
       <div class="server-status-badge">
@@ -29,6 +29,9 @@
       <a href="#rules" class="nav-btn" title="Reglas">
         <span class="nav-icon">📜</span>
       </a>
+      <a href="#" id="open-auth" class="nav-btn" title="Cuenta">
+        <span class="nav-icon">👤</span>
+      </a>
       <a href="https://discord.gg/7mYXHTg5" target="_blank" class="nav-btn discord" title="Discord">
         <img src="assets/icons/discord-minecraft.png" alt="Discord" class="nav-icon discord-icon">
       </a>
@@ -38,7 +41,7 @@
     </div>
   </aside>
 
-  <!-- Hero Section (Cinematic) -->
+  <!-- Hero Section -->
   <section class="hero" id="hero">
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
@@ -75,7 +78,7 @@
       </div>
     </div>
 
-    <!-- Floating 3D Characters (Dueños) -->
+    <!-- Dueños (✅ sin bug de superposición) -->
     <div class="floating-characters">
       <div class="char theking" title="TheKingAJRH - Owner">
         <img src="https://crafatar.com/renders/body/550e8400-e29b-41d4-a716-446655440001?overlay=true" alt="TheKingAJRH">
@@ -90,7 +93,7 @@
     </div>
   </section>
 
-  <!-- Leadership Section -->
+  <!-- Leadership -->
   <section id="leadership" class="section leadership">
     <div class="container">
       <h2 class="section-title">Liderazgo</h2>
@@ -185,12 +188,11 @@
     </div>
   </section>
 
-  <!-- ✅ NUEVO: Reglas del Servidor -->
+  <!-- Reglas -->
   <section id="rules" class="section rules">
     <div class="container">
       <h2 class="section-title">📜 Reglas del Servidor</h2>
       <p class="section-desc">Romperlas = Ban permanente. Sin advertencias.</p>
-
       <div class="rules-grid">
         <div class="rule-card">
           <div class="rule-number">1</div>
@@ -223,13 +225,80 @@
           <p>Las decisiones del staff son finales. Apelaciones por DM en Discord.</p>
         </div>
       </div>
-
       <div class="rules-footer">
         <p>✅ Al conectarte, aceptas estas reglas.  
            <a href="https://discord.gg/7mYXHTg5" target="_blank">Únete al Discord</a> para más detalles.</p>
       </div>
     </div>
   </section>
+
+  <!-- ✅ MODAL: Login / Register -->
+  <div id="auth-modal" class="modal">
+    <div class="modal-content">
+      <button id="close-modal" class="close-btn">&times;</button>
+
+      <div class="modal-tabs">
+        <button id="tab-login" class="tab-btn active">Iniciar Sesión</button>
+        <button id="tab-register" class="tab-btn">Registrarse</button>
+      </div>
+
+      <form id="login-form" class="auth-form active">
+        <div class="input-group">
+          <label for="login-username">Nombre de usuario</label>
+          <div class="input-with-icon">
+            <span class="input-icon">👤</span>
+            <input type="text" id="login-username" required>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="login-password">Contraseña</label>
+          <div class="input-with-icon">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="login-password" required>
+          </div>
+        </div>
+        <button type="submit" class="auth-btn">Acceder al Búnker</button>
+        <p class="switch-text">
+          ¿No tienes cuenta? <a href="#" id="switch-to-register">Regístrate aquí</a>
+        </p>
+      </form>
+
+      <form id="register-form" class="auth-form">
+        <div class="input-group">
+          <label for="reg-username">Nombre de usuario</label>
+          <div class="input-with-icon">
+            <span class="input-icon">👤</span>
+            <input type="text" id="reg-username" required minlength="3" maxlength="16" pattern="[a-zA-Z0-9_]+">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="reg-email">Correo (opcional)</label>
+          <div class="input-with-icon">
+            <span class="input-icon">✉️</span>
+            <input type="email" id="reg-email">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="reg-password">Contraseña</label>
+          <div class="input-with-icon">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="reg-password" required minlength="6">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="reg-confirm">Confirmar contraseña</label>
+          <div class="input-with-icon">
+            <span class="input-icon">✅</span>
+            <input type="password" id="reg-confirm" required>
+          </div>
+        </div>
+        <button type="submit" class="auth-btn register">Crear Cuenta de Superviviente</button>
+        <p class="switch-text">
+          ¿Ya tienes cuenta? <a href="#" id="switch-to-login">Inicia sesión</a>
+        </p>
+      </form>
+    </div>
+  </div>
 
   <footer class="footer">
     <p>© 2025 ANCIENCRAFT STUDIOS — Hecho para los que no temen al caos.</p>
