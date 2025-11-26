@@ -43,7 +43,7 @@ setInterval(() => {
   playerCountEl.textContent = players.toLocaleString();
 }, 3000);
 
-// ===== MODAL DE AUTENTICACIÓN =====
+// ===== MODAL DE AUTENTICACIÓN Y PERFIL =====
 const modal = document.getElementById('auth-modal');
 const openBtn = document.getElementById('open-auth');
 const closeBtn = document.getElementById('close-modal');
@@ -53,18 +53,24 @@ const tabLogin = document.getElementById('tab-login');
 const tabRegister = document.getElementById('tab-register');
 const switchToRegister = document.getElementById('switch-to-register');
 const switchToLogin = document.getElementById('switch-to-login');
+const profileSection = document.getElementById('perfil');
+const profileBtn = document.getElementById('profile-btn');
+const logoutBtn = document.getElementById('logout-btn');
 
+// Abrir modal
 openBtn.addEventListener('click', (e) => {
   e.preventDefault();
   modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 });
 
+// Cerrar modal
 closeBtn.addEventListener('click', () => {
   modal.style.display = 'none';
   document.body.style.overflow = '';
 });
 
+// Cambiar pestañas
 function switchTab(isLogin) {
   if (isLogin) {
     tabLogin.classList.add('active');
@@ -84,24 +90,30 @@ tabRegister.addEventListener('click', () => switchTab(false));
 switchToRegister.addEventListener('click', (e) => { e.preventDefault(); switchTab(false); });
 switchToLogin.addEventListener('click', (e) => { e.preventDefault(); switchTab(true); });
 
+// Login
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const username = document.getElementById('login-username').value.trim();
   if (username) {
-    localStorage.setItem('anciencraftUser', JSON.stringify({
+    const user = {
       username: username,
       loggedIn: true,
-      timestamp: Date.now()
-    }));
+      timestamp: Date.now(),
+      kills: Math.floor(Math.random() * 50),
+      deaths: Math.floor(Math.random() * 20),
+      level: Math.floor(Math.random() * 10) + 1
+    };
+    localStorage.setItem('anciencraftUser', JSON.stringify(user));
     alert(`✅ Bienvenido, ${username}.\nHas accedido al búnker de ANCIENCRAFT.`);
     modal.style.display = 'none';
     document.body.style.overflow = '';
-    updateAuthUI(username);
+    updateUI(user);
   } else {
     alert('❌ Nombre de usuario requerido.');
   }
 });
 
+// Registro
 registerForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const username = document.getElementById('reg-username').value.trim();
@@ -114,34 +126,99 @@ registerForm.addEventListener('submit', (e) => {
   }
 
   if (username && username.length >= 3 && password.length >= 6) {
-    localStorage.setItem('anciencraftUser', JSON.stringify({
+    const user = {
       username: username,
       loggedIn: true,
-      timestamp: Date.now()
-    }));
+      timestamp: Date.now(),
+      kills: 0,
+      deaths: 0,
+      level: 1
+    };
+    localStorage.setItem('anciencraftUser', JSON.stringify(user));
     alert(`✅ Cuenta creada: ${username}.\n¡Bienvenido al apocalipsis!`);
     modal.style.display = 'none';
     document.body.style.overflow = '';
-    updateAuthUI(username);
+    updateUI(user);
   } else {
     alert('❌ Usuario (≥3) y contraseña (≥6) requeridos.');
   }
 });
 
-function updateAuthUI(username) {
-  const authBtn = document.getElementById('open-auth');
-  authBtn.innerHTML = `<span class="nav-icon">${username[0].toUpperCase()}</span>`;
-  authBtn.title = `Perfil: ${username}`;
+// Actualizar interfaz según estado de sesión
+function updateUI(user) {
+  if (user && user.loggedIn) {
+    // Mostrar perfil, ocultar login
+    document.getElementById('open-auth').classList.add('hidden');
+    document.getElementById('profile-btn').classList.remove('hidden');
+    
+    // Actualizar avatar y datos
+    const avatarUrl = `https://crafatar.com/avatars/${user.username}?size=128&overlay`;
+    document.getElementById('profile-avatar-img').src = avatarUrl;
+    document.getElementById('profile-username').textContent = user.username;
+    document.getElementById('profile-joined').textContent = new Date(user.timestamp).toLocaleDateString('es-ES');
+    document.getElementById('profile-kills').textContent = user.kills;
+    document.getElementById('profile-deaths').textContent = user.deaths;
+    document.getElementById('profile-level').textContent = user.level;
+    
+    // Mostrar sección de perfil si está en #perfil
+    if (window.location.hash === '#perfil') {
+      document.getElementById('hero').classList.add('hidden');
+      document.getElementById('leadership').classList.add('hidden');
+      document.getElementById('top').classList.add('hidden');
+      document.getElementById('arsenal').classList.add('hidden');
+      document.getElementById('rules').classList.add('hidden');
+      profileSection.classList.remove('hidden');
+    }
+  } else {
+    // Restaurar estado sin sesión
+    document.getElementById('open-auth').classList.remove('hidden');
+    document.getElementById('profile-btn').classList.add('hidden');
+    profileSection.classList.add('hidden');
+    restoreSections();
+  }
 }
+
+// Cerrar sesión
+logoutBtn.addEventListener('click', () => {
+  localStorage.removeItem('anciencraftUser');
+  alert('✅ Sesión cerrada. Vuelve pronto, superviviente.');
+  updateUI(null);
+  window.location.hash = '';
+});
+
+// Restaurar secciones principales
+function restoreSections() {
+  document.getElementById('hero').classList.remove('hidden');
+  document.getElementById('leadership').classList.remove('hidden');
+  document.getElementById('top').classList.remove('hidden');
+  document.getElementById('arsenal').classList.remove('hidden');
+  document.getElementById('rules').classList.remove('hidden');
+  profileSection.classList.add('hidden');
+}
+
+// Navegación por hash (simula SPA)
+window.addEventListener('hashchange', () => {
+  const user = JSON.parse(localStorage.getItem('anciencraftUser') || '{}');
+  if (user.loggedIn && window.location.hash === '#perfil') {
+    restoreSections();
+    profileSection.classList.remove('hidden');
+  } else {
+    restoreSections();
+  }
+});
 
 // Verificar sesión al cargar
 document.addEventListener('DOMContentLoaded', () => {
-  const user = localStorage.getItem('anciencraftUser');
-  if (user) {
+  const userData = localStorage.getItem('anciencraftUser');
+  if (userData) {
     try {
-      const data = JSON.parse(user);
-      if (data.loggedIn && Date.now() - data.timestamp < 7 * 24 * 60 * 60 * 1000) {
-        updateAuthUI(data.username);
+      const user = JSON.parse(userData);
+      const now = Date.now();
+      // Sesión válida por 30 días
+      if (user.loggedIn && now - user.timestamp < 30 * 24 * 60 * 60 * 1000) {
+        updateUI(user);
+      } else {
+        localStorage.removeItem('anciencraftUser');
       }
     } catch (e) {
       localStorage.removeItem('anciencraftUser');

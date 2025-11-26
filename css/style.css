@@ -24,6 +24,10 @@ body {
   position: relative;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .section-title {
   font-family: 'Orbitron', sans-serif;
   font-weight: 700;
@@ -117,6 +121,11 @@ body {
   box-shadow: 0 0 15px rgba(77, 255, 145, 0.6);
 }
 
+.nav-btn.profile:hover {
+  background: var(--moss-green);
+  box-shadow: 0 0 15px rgba(106, 167, 79, 0.6);
+}
+
 .nav-btn.discord:hover {
   background: #5865f2;
   box-shadow: 0 0 15px rgba(88, 101, 242, 0.6);
@@ -149,14 +158,14 @@ body {
   letter-spacing: 2px;
 }
 
-/* ✅ ICONO DISCORD LOCAL */
+/* Iconos */
 .nav-icon {
   width: 40px;
   height: 40px;
   object-fit: contain;
   image-rendering: pixelated;
 }
-.discord-icon {
+.discord-icon, .profile-icon {
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
 }
 
@@ -402,16 +411,21 @@ body {
   margin: 0 auto;
 }
 
-.leadership {
+.leadership, .arsenal, .rules, .profile-section {
   background: linear-gradient(to bottom, var(--slate-deep), #12121a);
 }
-.leaders-grid {
+.top-players {
+  background: url('../assets/textures/bedrock-dark.jpg') center;
+  background-size: 300px;
+}
+
+.leaders-grid, .weapons-grid, .rules-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 2.5rem;
   margin-top: 3rem;
 }
-.leader-card {
+
+.leader-card, .weapon-item, .rule-card {
   background: var(--glass-bg);
   backdrop-filter: blur(12px);
   border-radius: 16px;
@@ -420,21 +434,21 @@ body {
   border: 1px solid var(--glass-border);
   transition: transform 0.3s, box-shadow 0.3s;
 }
-.leader-card:hover {
+.leader-card:hover, .weapon-item:hover, .rule-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 .leader-card.owner { border-top: 4px solid var(--gold); }
 .leader-card.subowner { border-top: 4px solid var(--purple-neon); }
 
-.leader-avatar {
+.leader-avatar, .player-avatar-wrapper {
   width: 140px;
   height: 280px;
   margin: 0 auto 1.5rem;
   overflow: hidden;
   border-radius: 8px;
 }
-.leader-avatar img {
+.leader-avatar img, .player-avatar-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -442,22 +456,20 @@ body {
   filter: drop-shadow(0 8px 12px rgba(0,0,0,0.4));
 }
 
-.leader-card h3 {
+.leader-card h3, .player-name {
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
   color: white;
 }
-.leader-role {
+.leader-role, .player-stats {
   font-size: 1rem;
-  color: var(--toxic-neon);
   margin-bottom: 1rem;
   font-weight: 600;
 }
+.leader-role { color: var(--toxic-neon); }
+.player-stats { color: #aaa; }
 
-.top-players {
-  background: url('../assets/textures/bedrock-dark.jpg') center;
-  background-size: 300px;
-}
+/* Top Players Podium */
 .floating-podium {
   display: flex;
   justify-content: center;
@@ -482,7 +494,6 @@ body {
   color: var(--gold);
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
 }
-
 .player-card {
   background: var(--glass-bg);
   backdrop-filter: blur(10px);
@@ -497,85 +508,74 @@ body {
   transform: scale(1.05);
   box-shadow: 0 12px 30px rgba(0,0,0,0.5);
 }
-.player-avatar-wrapper {
-  width: 100px;
-  height: 200px;
-  margin: 0 auto 1rem;
-  overflow: hidden;
-  border-radius: 6px;
+
+/* ✅ PERFIL DE USUARIO */
+.profile-section {
+  padding-top: 4rem;
 }
-.player-avatar-wrapper img {
+.profile-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 2.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid var(--glass-border);
+}
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.profile-avatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--toxic-neon);
+  box-shadow: 0 0 20px rgba(77, 255, 145, 0.3);
+}
+.profile-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   image-rendering: pixelated;
 }
-.player-info { text-align: center; }
-.player-name { font-weight: 700; font-size: 1.4rem; color: white; }
-.player-stats { font-size: 0.95rem; color: #aaa; margin-top: 0.3rem; }
-
-.arsenal .weapons-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
+.profile-info h3 {
+  font-size: 2.2rem;
+  color: white;
+  margin-bottom: 0.5rem;
 }
-.weapon-item {
-  background: rgba(20, 20, 30, 0.7);
-  padding: 2rem;
-  border-radius: 14px;
+.profile-status {
+  color: #aaa;
+  margin-bottom: 1.5rem;
+}
+.profile-stats {
+  display: flex;
+  gap: 1.5rem;
+}
+.stat {
   text-align: center;
-  border: 1px solid rgba(100, 255, 200, 0.1);
 }
-.weapon-icon { font-size: 3rem; margin-bottom: 1rem; color: var(--toxic-neon); }
-.weapon-item h4 { font-size: 1.5rem; margin-bottom: 0.8rem; color: white; }
-
-/* ✅ REGLAS */
-.rules {
-  background: linear-gradient(to bottom, #12121a, var(--dark-slate));
-}
-.rules-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.8rem;
-  margin-top: 2.5rem;
-}
-.rule-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  border-radius: 14px;
-  padding: 1.8rem;
-  border: 1px solid var(--glass-border);
-  transition: transform 0.3s;
-}
-.rule-card:hover { transform: translateY(-6px); }
-.rule-number {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  background: var(--toxic-neon);
-  color: var(--dark-slate);
-  border-radius: 50%;
-  font-weight: bold;
+.stat-value {
   font-family: 'Orbitron', sans-serif;
-  margin-bottom: 1rem;
-}
-.rule-card h3 { font-size: 1.4rem; color: white; margin-bottom: 0.8rem; }
-.rule-card p { color: #bbb; line-height: 1.6; }
-.rules-footer {
-  text-align: center;
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
-.rules-footer a {
+  font-size: 1.8rem;
   color: var(--toxic-neon);
-  text-decoration: none;
-  font-weight: 600;
 }
-.rules-footer a:hover { text-decoration: underline; }
+.stat-label {
+  font-size: 0.9rem;
+  color: #888;
+}
+.profile-actions {
+  text-align: center;
+}
+.logout {
+  background: linear-gradient(135deg, var(--oxide-red), #cc3b2e);
+}
+.logout:hover {
+  box-shadow: 0 6px 16px rgba(255, 59, 48, 0.5);
+}
 
 /* ✅ MODAL DE AUTENTICACIÓN */
 .modal {
@@ -759,10 +759,10 @@ body {
   .tactical-sidebar { width: 70px; }
   .tactical-sidebar:hover { width: 70px; }
   .nav-btn::after { display: none; }
+  .profile-header { flex-direction: column; text-align: center; }
 }
 @media (max-width: 600px) {
   .live-stats { flex-direction: column; }
   .terminal-line { flex-direction: column; gap: 0.8rem; }
-  .leaders-grid, .weapons-grid, .rules-grid { grid-template-columns: 1fr; }
-  .modal-content { padding: 1.8rem; }
+  .profile-stats { flex-direction: column; }
 }

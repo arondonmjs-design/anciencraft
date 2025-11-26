@@ -29,7 +29,10 @@
       <a href="#rules" class="nav-btn" title="Reglas">
         <span class="nav-icon">📜</span>
       </a>
-      <a href="#" id="open-auth" class="nav-btn" title="Cuenta">
+      <a href="#perfil" id="profile-btn" class="nav-btn profile hidden" title="Perfil">
+        <img src="https://crafatar.com/avatars/default?size=40" alt="Perfil" class="nav-icon profile-icon">
+      </a>
+      <a href="#" id="open-auth" class="nav-btn auth-toggle" title="Cuenta">
         <span class="nav-icon">👤</span>
       </a>
       <a href="https://discord.gg/7mYXHTg5" target="_blank" class="nav-btn discord" title="Discord">
@@ -78,7 +81,7 @@
       </div>
     </div>
 
-    <!-- Dueños (✅ sin bug de superposición) -->
+    <!-- Dueños -->
     <div class="floating-characters">
       <div class="char theking" title="TheKingAJRH - Owner">
         <img src="https://crafatar.com/renders/body/550e8400-e29b-41d4-a716-446655440001?overlay=true" alt="TheKingAJRH">
@@ -232,6 +235,41 @@
     </div>
   </section>
 
+  <!-- ✅ PERFIL DE USUARIO (oculto por defecto) -->
+  <section id="perfil" class="section profile-section hidden">
+    <div class="container">
+      <h2 class="section-title">👤 Mi Perfil</h2>
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar">
+            <img id="profile-avatar-img" src="https://crafatar.com/avatars/default?size=128" alt="Avatar">
+          </div>
+          <div class="profile-info">
+            <h3 id="profile-username">Cargando...</h3>
+            <p id="profile-status" class="profile-status">Superviviente desde: <span id="profile-joined">-</span></p>
+            <div class="profile-stats">
+              <div class="stat">
+                <div class="stat-value" id="profile-kills">0</div>
+                <div class="stat-label">Kills</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value" id="profile-deaths">0</div>
+                <div class="stat-label">Deaths</div>
+              </div>
+              <div class="stat">
+                <div class="stat-value" id="profile-level">1</div>
+                <div class="stat-label">Nivel</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="profile-actions">
+          <button id="logout-btn" class="auth-btn logout">Cerrar Sesión</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ✅ MODAL: Login / Register -->
   <div id="auth-modal" class="modal">
     <div class="modal-content">
@@ -244,10 +282,10 @@
 
       <form id="login-form" class="auth-form active">
         <div class="input-group">
-          <label for="login-username">Nombre de usuario</label>
+          <label for="login-username">Nombre de usuario (Minecraft)</label>
           <div class="input-with-icon">
             <span class="input-icon">👤</span>
-            <input type="text" id="login-username" required>
+            <input type="text" id="login-username" required minlength="3" maxlength="16">
           </div>
         </div>
         <div class="input-group">
@@ -265,7 +303,7 @@
 
       <form id="register-form" class="auth-form">
         <div class="input-group">
-          <label for="reg-username">Nombre de usuario</label>
+          <label for="reg-username">Nombre de usuario (Minecraft)</label>
           <div class="input-with-icon">
             <span class="input-icon">👤</span>
             <input type="text" id="reg-username" required minlength="3" maxlength="16" pattern="[a-zA-Z0-9_]+">
