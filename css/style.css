@@ -158,7 +158,6 @@ body {
   letter-spacing: 2px;
 }
 
-/* Iconos */
 .nav-icon {
   width: 40px;
   height: 40px;
@@ -330,7 +329,6 @@ body {
   color: #aaa;
 }
 
-/* ✅ FIX: Floating characters */
 .floating-characters {
   position: absolute;
   left: 50%;
@@ -509,7 +507,7 @@ body {
   box-shadow: 0 12px 30px rgba(0,0,0,0.5);
 }
 
-/* ✅ PERFIL DE USUARIO */
+/* ✅ PERFIL */
 .profile-section {
   padding-top: 4rem;
 }
@@ -577,7 +575,7 @@ body {
   box-shadow: 0 6px 16px rgba(255, 59, 48, 0.5);
 }
 
-/* ✅ MODAL DE AUTENTICACIÓN */
+/* MODAL */
 .modal {
   display: none;
   position: fixed;

@@ -1,9 +1,8 @@
-// Typewriter IP
+// Typewriter
 document.addEventListener('DOMContentLoaded', () => {
   const ipText = "mc.ancientcraft.qzz.io";
   const typewriterEl = document.getElementById('typewriter-ip');
   typewriterEl.textContent = '';
-  
   let i = 0;
   const typeInterval = setInterval(() => {
     if (i < ipText.length) {
@@ -34,7 +33,7 @@ document.getElementById('copy-btn').addEventListener('click', async () => {
   }
 });
 
-// Jugadores simulados
+// Jugadores
 const playerCountEl = document.getElementById('player-count');
 let players = 1240;
 setInterval(() => {
@@ -43,7 +42,14 @@ setInterval(() => {
   playerCountEl.textContent = players.toLocaleString();
 }, 3000);
 
-// ===== MODAL DE AUTENTICACIÓN Y PERFIL =====
+// ✅ UUID mapping real
+const USERNAME_TO_UUID = {
+  'TheKingAJRH': '3822c135-781e-4719-b69a-157b8cd3d0cc',
+  'AlproYT': 'f48c2924-00ce-4d86-ac6d-b0e4b8a29582',
+  'DominicanaOHIO': '76684784-fa7c-4f00-bebf-4efce6d31bb6'
+};
+
+// Modal y perfil
 const modal = document.getElementById('auth-modal');
 const openBtn = document.getElementById('open-auth');
 const closeBtn = document.getElementById('close-modal');
@@ -57,20 +63,17 @@ const profileSection = document.getElementById('perfil');
 const profileBtn = document.getElementById('profile-btn');
 const logoutBtn = document.getElementById('logout-btn');
 
-// Abrir modal
 openBtn.addEventListener('click', (e) => {
   e.preventDefault();
   modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 });
 
-// Cerrar modal
 closeBtn.addEventListener('click', () => {
   modal.style.display = 'none';
   document.body.style.overflow = '';
 });
 
-// Cambiar pestañas
 function switchTab(isLogin) {
   if (isLogin) {
     tabLogin.classList.add('active');
@@ -90,7 +93,6 @@ tabRegister.addEventListener('click', () => switchTab(false));
 switchToRegister.addEventListener('click', (e) => { e.preventDefault(); switchTab(false); });
 switchToLogin.addEventListener('click', (e) => { e.preventDefault(); switchTab(true); });
 
-// Login
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const username = document.getElementById('login-username').value.trim();
@@ -113,7 +115,6 @@ loginForm.addEventListener('submit', (e) => {
   }
 });
 
-// Registro
 registerForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const username = document.getElementById('reg-username').value.trim();
@@ -144,23 +145,21 @@ registerForm.addEventListener('submit', (e) => {
   }
 });
 
-// Actualizar interfaz según estado de sesión
 function updateUI(user) {
   if (user && user.loggedIn) {
-    // Mostrar perfil, ocultar login
     document.getElementById('open-auth').classList.add('hidden');
     document.getElementById('profile-btn').classList.remove('hidden');
+
+    const uuid = USERNAME_TO_UUID[user.username] || user.username;
+    const avatarUrl = `https://crafatar.com/avatars/${uuid}?size=128&overlay`;
     
-    // Actualizar avatar y datos
-    const avatarUrl = `https://crafatar.com/avatars/${user.username}?size=128&overlay`;
     document.getElementById('profile-avatar-img').src = avatarUrl;
     document.getElementById('profile-username').textContent = user.username;
     document.getElementById('profile-joined').textContent = new Date(user.timestamp).toLocaleDateString('es-ES');
     document.getElementById('profile-kills').textContent = user.kills;
     document.getElementById('profile-deaths').textContent = user.deaths;
     document.getElementById('profile-level').textContent = user.level;
-    
-    // Mostrar sección de perfil si está en #perfil
+
     if (window.location.hash === '#perfil') {
       document.getElementById('hero').classList.add('hidden');
       document.getElementById('leadership').classList.add('hidden');
@@ -170,7 +169,6 @@ function updateUI(user) {
       profileSection.classList.remove('hidden');
     }
   } else {
-    // Restaurar estado sin sesión
     document.getElementById('open-auth').classList.remove('hidden');
     document.getElementById('profile-btn').classList.add('hidden');
     profileSection.classList.add('hidden');
@@ -178,7 +176,6 @@ function updateUI(user) {
   }
 }
 
-// Cerrar sesión
 logoutBtn.addEventListener('click', () => {
   localStorage.removeItem('anciencraftUser');
   alert('✅ Sesión cerrada. Vuelve pronto, superviviente.');
@@ -186,7 +183,6 @@ logoutBtn.addEventListener('click', () => {
   window.location.hash = '';
 });
 
-// Restaurar secciones principales
 function restoreSections() {
   document.getElementById('hero').classList.remove('hidden');
   document.getElementById('leadership').classList.remove('hidden');
@@ -196,7 +192,6 @@ function restoreSections() {
   profileSection.classList.add('hidden');
 }
 
-// Navegación por hash (simula SPA)
 window.addEventListener('hashchange', () => {
   const user = JSON.parse(localStorage.getItem('anciencraftUser') || '{}');
   if (user.loggedIn && window.location.hash === '#perfil') {
@@ -207,15 +202,12 @@ window.addEventListener('hashchange', () => {
   }
 });
 
-// Verificar sesión al cargar
 document.addEventListener('DOMContentLoaded', () => {
   const userData = localStorage.getItem('anciencraftUser');
   if (userData) {
     try {
       const user = JSON.parse(userData);
-      const now = Date.now();
-      // Sesión válida por 30 días
-      if (user.loggedIn && now - user.timestamp < 30 * 24 * 60 * 60 * 1000) {
+      if (user.loggedIn && Date.now() - user.timestamp < 30 * 24 * 60 * 60 * 1000) {
         updateUI(user);
       } else {
         localStorage.removeItem('anciencraftUser');
