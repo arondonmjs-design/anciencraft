@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ANCIENCRAFT | Servidor Élite de Supervivencia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <!-- Tactical Sidebar (HUD Moderno) -->
+  <aside class="tactical-sidebar">
+    <div class="sidebar-header">
+      <div class="server-status-badge">
+        <span class="status-dot online"></span> ONLINE
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#leadership" class="nav-btn active" title="Liderazgo">
+        <span class="nav-icon">👑</span>
+      </a>
+      <a href="#top" class="nav-btn" title="Top Jugadores">
+        <span class="nav-icon">🏆</span>
+      </a>
+      <a href="#arsenal" class="nav-btn" title="Arsenal">
+        <span class="nav-icon">🔫</span>
+      </a>
+      <a href="#rules" class="nav-btn" title="Reglas">
+        <span class="nav-icon">📜</span>
+      </a>
+      <a href="https://discord.gg/7mYXHTg5" target="_blank" class="nav-btn discord" title="Discord">
+        <img src="assets/icons/discord-minecraft.png" alt="Discord" class="nav-icon discord-icon">
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <span class="ip-mini">mc.ancientcraft.qzz.io</span>
+    </div>
+  </aside>
+
+  <!-- Hero Section (Cinematic) -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <div class="logo-wrapper">
+        <h1 class="logo-animated" id="animated-logo">
+          <span>A</span><span>N</span><span>C</span><span>I</span><span>E</span><span>N</span><span>C</span><span>R</span><span>A</span><span>F</span><span>T</span>
+        </h1>
+        <div class="logo-subtitle">Survival • PvP • Base Raiding</div>
+      </div>
+
+      <div class="terminal-ip">
+        <div class="terminal-line">
+          <span class="terminal-prompt">> </span>
+          <span id="typewriter-ip">mc.ancientcraft.qzz.io</span>
+          <button id="copy-btn" class="copy-btn-neon">📋 Copiar IP</button>
+        </div>
+      </div>
+
+      <div class="live-stats">
+        <div class="stat-card">
+          <div class="stat-value" id="player-count">1,240</div>
+          <div class="stat-label">Supervivientes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">47</div>
+          <div class="stat-label">Bases Raided</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">98%</div>
+          <div class="stat-label">Uptime</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating 3D Characters (Dueños) -->
+    <div class="floating-characters">
+      <div class="char theking" title="TheKingAJRH - Owner">
+        <img src="https://crafatar.com/renders/body/550e8400-e29b-41d4-a716-446655440001?overlay=true" alt="TheKingAJRH">
+        <div class="char-name">TheKingAJRH</div>
+        <div class="char-role">👑 Owner</div>
+      </div>
+      <div class="char alpro" title="AlproYT - Sub-Owner">
+        <img src="https://crafatar.com/renders/body/123e4567-e89b-12d3-a456-426614174000?overlay=true" alt="AlproYT">
+        <div class="char-name">AlproYT</div>
+        <div class="char-role">🛡️ Sub-Owner</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leadership Section -->
+  <section id="leadership" class="section leadership">
+    <div class="container">
+      <h2 class="section-title">Liderazgo</h2>
+      <p class="section-desc">Los arquitectos del nuevo orden en las ruinas.</p>
+      <div class="leaders-grid">
+        <div class="leader-card owner">
+          <div class="leader-avatar">
+            <img src="https://crafatar.com/renders/body/550e8400-e29b-41d4-a716-446655440001?overlay=true" alt="TheKingAJRH">
+          </div>
+          <h3>TheKingAJRH</h3>
+          <div class="leader-role">👑 Fundador & Owner</div>
+          <p>El rey indiscutible de ANCIENCRAFT. Estratega, builder y leyenda viviente.</p>
+        </div>
+        <div class="leader-card subowner">
+          <div class="leader-avatar">
+            <img src="https://crafatar.com/renders/body/123e4567-e89b-12d3-a456-426614174000?overlay=true" alt="AlproYT">
+          </div>
+          <h3>AlproYT</h3>
+          <div class="leader-role">🛡️ Sub-Owner</div>
+          <p>Mano derecha del rey. Maestro en PvP y gestión de eventos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Players -->
+  <section id="top" class="section top-players">
+    <div class="container">
+      <h2 class="section-title">Top Supervivientes</h2>
+      <p class="section-desc">Los más letales del apocalipsis.</p>
+      <div class="floating-podium">
+        <div class="podium-slot second">
+          <div class="player-card">
+            <div class="player-avatar-wrapper">
+              <img src="https://crafatar.com/renders/body/123e4567-e89b-12d3-a456-426614174000?overlay=true" alt="AlproYT">
+            </div>
+            <div class="player-info">
+              <div class="player-name">AlproYT</div>
+              <div class="player-stats">487 kills • Lvl 68</div>
+            </div>
+          </div>
+        </div>
+        <div class="podium-slot first">
+          <div class="player-card top">
+            <div class="crown">👑</div>
+            <div class="player-avatar-wrapper">
+              <img src="https://crafatar.com/renders/body/550e8400-e29b-41d4-a716-446655440001?overlay=true" alt="TheKingAJRH">
+            </div>
+            <div class="player-info">
+              <div class="player-name">TheKingAJRH</div>
+              <div class="player-stats">612 kills • Lvl 92</div>
+            </div>
+          </div>
+        </div>
+        <div class="podium-slot third">
+          <div class="player-card">
+            <div class="player-avatar-wrapper">
+              <img src="https://crafatar.com/renders/body/abcdef12-3456-7890-abcd-ef1234567890?overlay=true" alt="Rook">
+            </div>
+            <div class="player-info">
+              <div class="player-name">Rook</div>
+              <div class="player-stats">421 kills • Lvl 61</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Arsenal -->
+  <section id="arsenal" class="section arsenal dark-stone">
+    <div class="container">
+      <h2 class="section-title">Arsenal Élite</h2>
+      <p class="section-desc">Armas diseñadas para dominar el caos.</p>
+      <div class="weapons-grid">
+        <div class="weapon-item">
+          <div class="weapon-icon">🔫</div>
+          <h4>AK-47 Blocky</h4>
+          <p>Alta cadencia. Ideal para CQC.</p>
+        </div>
+        <div class="weapon-item">
+          <div class="weapon-icon">💥</div>
+          <h4>Granada Tóxica</h4>
+          <p>Daño en área + veneno.</p>
+        </div>
+        <div class="weapon-item">
+          <div class="weapon-icon">📡</div>
+          <h4>Drone de Vigilancia</h4>
+          <p>Revela enemigos ocultos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ NUEVO: Reglas del Servidor -->
+  <section id="rules" class="section rules">
+    <div class="container">
+      <h2 class="section-title">📜 Reglas del Servidor</h2>
+      <p class="section-desc">Romperlas = Ban permanente. Sin advertencias.</p>
+
+      <div class="rules-grid">
+        <div class="rule-card">
+          <div class="rule-number">1</div>
+          <h3>🚫 No griefing</h3>
+          <p>Destruir bases sin consentimiento está estrictamente prohibido.</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-number">2</div>
+          <h3>⚔️ PvP justo</h3>
+          <p>No spawnkill, no lag-switching, no exploits.</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-number">3</div>
+          <h3>💬 Respeto total</h3>
+          <p>Cero tolerancia a racismo, homofobia o acoso en chat/voz.</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-number">4</div>
+          <h3>🧱 Builds realistas</h3>
+          <p>Nada de “cajas de 1×1×100”. Construye como un superviviente.</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-number">5</div>
+          <h3>🔒 IPs privadas</h3>
+          <p>No compartas la IP del servidor en streams públicos sin permiso.</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-number">6</div>
+          <h3>🧑‍⚖️ Staff = Autoridad</h3>
+          <p>Las decisiones del staff son finales. Apelaciones por DM en Discord.</p>
+        </div>
+      </div>
+
+      <div class="rules-footer">
+        <p>✅ Al conectarte, aceptas estas reglas.  
+           <a href="https://discord.gg/7mYXHTg5" target="_blank">Únete al Discord</a> para más detalles.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 ANCIENCRAFT STUDIOS — Hecho para los que no temen al caos.</p>
+    <p class="footer-note">Servidor 100% en español 🇲🇽🇨🇴🇦🇷🇪🇸</p>
+  </footer>
+</body>
+</html>
